@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Time</title>
+  <!-- Google Font for a clean, modern look -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #001f3f, #3a007d);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 1rem;
+    }
+    .container {
+      background: linear-gradient(145deg, #000, #1a1a1a);
+      border: 2px solid #fff;
+      border-radius: 10px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.7);
+      width: 100%;
+      max-width: 600px;
+    }
+    h1 {
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+    }
+    .time-card {
+      background: linear-gradient(135deg, #001f3f, #003366);
+      margin: 1rem 0;
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 1px solid #fff;
+      transition: background 0.3s ease;
+    }
+    .time-card:hover {
+      background: linear-gradient(135deg, #000, #00264d);
+    }
+    .region {
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.5px;
+    }
+    .datetime {
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+    }
+    footer {
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Time</h1>
+    <div class="time-card">
+      <div class="region">Germany</div>
+      <div class="datetime" id="time-germany"></div>
+    </div>
+    <div class="time-card">
+      <div class="region">South Korea</div>
+      <div class="datetime" id="time-southkorea"></div>
+    </div>
+    <div class="time-card">
+      <div class="region">Bangladesh</div>
+      <div class="datetime" id="time-bangladesh"></div>
+    </div>
+    <footer>Endure...</footer>
+  </div>
+
+  <script>
+    // Function to update time for a given timezone and element ID
+    function updateTime(timezone, elementId) {
+      const options = {
+        timeZone: timezone,
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      };
+      const now = new Date();
+      const timeString = now.toLocaleString('en-US', options);
+      document.getElementById(elementId).textContent = timeString;
+    }
+
+    // Function to update all times
+    function updateAllTimes() {
+      updateTime('Europe/Berlin', 'time-germany');
+      updateTime('Asia/Seoul', 'time-southkorea');
+      updateTime('Asia/Dhaka', 'time-bangladesh');
+    }
+
+    // Initial call to display time immediately
+    updateAllTimes();
+    // Update every second
+    setInterval(updateAllTimes, 1000);
+  </script>
+</body>
+</html>
